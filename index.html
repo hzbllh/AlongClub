@@ -154,7 +154,7 @@
       <label><input type="checkbox" id="leftRight" checked> Kiri/Kanan</label>
       <label><input type="checkbox" id="upDown" checked> Atas/Bawah</label>
     </div>
-    <button onclick="generate()">Generate!</button>
+    <button id="generateBtn" onclick="generate()">Generate!</button>
     <button id="resetBtn" onclick="resetAll()">Reset</button>
     <div id="result">-</div>
   </div>
@@ -168,272 +168,78 @@
 
   <script>
     function showPopup() {
+      console.log("Popup triggered");
       document.getElementById('popupSound').play().catch(function(error) {
         console.log("Audio play failed:", error);
       });
       alert("ALONG CLUB WELCOMES YOU!");
     }
+
     function generate() {
-      let min = parseInt(document.getElementById('min').value);
-      let max = parseInt(document.getElementById('max').value);
+      console.log("Generate button clicked");
+      const minInput = document.getElementById('min');
+      const maxInput = document.getElementById('max');
+      const leftRightCheckbox = document.getElementById('leftRight');
+      const upDownCheckbox = document.getElementById('upDown');
+      const resultDiv = document.getElementById('result');
+
+      if (!minInput || !maxInput || !leftRightCheckbox || !upDownCheckbox || !resultDiv) {
+        console.error("One or more elements not found");
+        alert("Ralat: Elemen HTML tidak ditemui!");
+        return;
+      }
+
+      let min = parseInt(minInput.value);
+      let max = parseInt(maxInput.value);
+
       if (isNaN(min) || isNaN(max)) {
+        console.error("Invalid number input:", minInput.value, maxInput.value);
         alert("Sila masukkan nombor yang sah!");
         return;
       }
+
       if (min >= max) {
+        console.error("Min is greater than or equal to Max:", min, max);
         alert("Max harus lebih besar dari Min!");
         return;
       }
+
       let number = Math.floor(Math.random() * (max - min + 1)) + min;
-      let leftRight = document.getElementById('leftRight').checked
+      let leftRight = leftRightCheckbox.checked
         ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
         : null;
-      let upDown = document.getElementById('upDown').checked
+      let upDown = upDownCheckbox.checked
         ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
         : null;
+
       let resultParts = [number];
       if (leftRight) resultParts.push(leftRight);
       if (upDown) resultParts.push(upDown);
+
       let result = resultParts.join(', ');
-      document.getElementById('result').innerText = result;
+      resultDiv.innerText = result;
+      console.log("Generated result:", result);
     }
+
     function resetAll() {
-      document.getElementById('result').innerText = '-';
-      document.getElementBy tukar header jadi macamni
+      console.log("Reset button clicked");
+      const minInput = document.getElementById('min');
+      const maxInput = document.getElementById('max');
+      const leftRightCheckbox = document.getElementById('leftRight');
+      const upDownCheckbox = document.getElementById('upDown');
+      const resultDiv = document.getElementById('result');
 
-       logo
-ALONG CLUB 
-
-
-dan besarkan logo tuu
-
-Saya akan mengemas kini kod HTML, CSS, dan JavaScript untuk menukar susunan header supaya logo berada di atas teks **ALONG CLUB** dan membesarkan saiz logo seperti yang diminta. Berikut adalah penjelasan perubahan dan kod lengkap:
-
-### Perubahan yang Dilakukan:
-1. **Susunan Header**  
-   - Header (`<h1>`) telah diubah untuk memaparkan logo di atas teks **ALONG CLUB** menggunakan CSS `flex-direction: column` supaya elemen tersusun secara menegak.
-   - Teks **ALONG CLUB** kekal di bawah logo dengan penjajaran tengah.
-
-2. **Besarkan Logo**  
-   - Saiz logo telah ditingkatkan daripada `height: 40px` kepada `height: 80px` dalam CSS untuk peranti standard.
-   - Saiz logo juga disesuaikan dalam media queries untuk memastikan ia kelihatan sesuai pada skrin yang lebih kecil:
-     - `height: 60px` untuk skrin di bawah 600px.
-     - `height: 50px` untuk skrin di bawah 400px.
-
-3. **Perubahan Lain yang Kekal**  
-   - Logo menggunakan pautan yang diberikan: `https://raw.githubusercontent.com/hzbllh/AlongClub/refs/heads/main/IMG_20250513_124840.jpg`.
-   - Link TikTok kekal sebagai `https://www.tiktok.com/@alongg27?_t=ZS-8wJQ2vfC0AM&_r=1`.
-   - Fitur sejarah kekal dialih keluar seperti dalam versi sebelumnya.
-   - Butang "Kembali ke Halaman Utama" kekal dialih keluar.
-   - Tema oren-hitam dan fungsi asas (penjanaan nombor, arah, reset, popup audio) dikekalkan.
-
-### Kod HTML yang Dikemas Kini:
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Along Club - Generator</title>
-  <meta name="description" content="Along Club: Random number and direction generator for gaming">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: #1c2526;
-      color: #ff6200;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-size: 2em;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      animation: fadeIn 1s forwards;
-    }
-    h1 img {
-      height: 80px;
-      width: auto;
-      cursor: pointer;
-      opacity: 0;
-      animation: fadeIn 1s forwards 0.2s;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
-      opacity: 0;
-      animation: fadeIn 1s forwards 0.4s;
-    }
-    input[type="number"], button {
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 1em;
-      width: 100%;
-      box-sizing: border-box;
-      border: none;
-      border-radius: 5px;
-    }
-    input[type="number"] {
-      background: #fff;
-      color: #1c2526;
-    }
-    button {
-      background: #ff6200;
-      color: #1c2526;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background: #ff8533;
-    }
-    #resetBtn {
-      background: #8b0000;
-      color: #fff;
-    }
-    #resetBtn:hover {
-      background: #a50000;
-    }
-    .checkbox-container {
-      display: flex;
-      flex-direction: column;
-      margin: 10px 0;
-    }
-    .checkbox-container label {
-      color: #ff6200;
-      font-size: 0.9em;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-    #result {
-      font-size: 2em;
-      margin: 20px 0;
-      opacity: 0;
-      animation: fadeIn 0.5s forwards;
-      text-align: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    #footer {
-      margin-top: 20px;
-      font-size: 1em;
-      color: #ff6200;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      opacity: 0;
-      animation: fadeIn 1s forwards 0.8s;
-    }
-    .social-links {
-      margin-top: 10px;
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
-    .social-links img {
-      width: 24px;
-      height: 24px;
-      transition: transform 0.3s;
-    }
-    .social-links img:hover {
-      transform: scale(1.2);
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.3em; }
-      h1 img { height: 60px; }
-      .container { padding: 15px; }
-      #result { font-size: 1.5em; }
-      #footer { font-size: 0.8em; }
-      .social-links img { width: 20px; height: 20px; }
-    }
-    @media (max-width: 400px) {
-      h1 { font-size: 1em; }
-      h1 img { height: 50px; }
-      #result { font-size: 1.2em; }
-    }
-  </style>
-</head>
-<body>
-  <h1>
-    <img src="https://raw.githubusercontent.com/hzbllh/AlongClub/refs/heads/main/IMG_20250513_124840.jpg" alt="Along Club Logo" onclick="showPopup()">
-    ALONG CLUB
-  </h1>
-  <div class="container">
-    <input type="number" id="min" placeholder="Min Number" value="1">
-    <input type="number" id="max" placeholder="Max Number" value="30">
-    <div class="checkbox-container">
-      <label><input type="checkbox" id="leftRight" checked> Kiri/Kanan</label>
-      <label><input type="checkbox" id="upDown" checked> Atas/Bawah</label>
-    </div>
-    <button onclick="generate()">Generate!</button>
-    <button id="resetBtn" onclick="resetAll()">Reset</button>
-    <div id="result">-</div>
-  </div>
-  <div id="footer">
-    ALONG CLUB - GOOD LUCK!
-    <div class="social-links">
-      <a href="https://www.tiktok.com/@alongg27?_t=ZS-8wJQ2vfC0AM&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-    </div>
-  </div>
-  <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
-
-  <script>
-    function showPopup() {
-      document.getElementById('popupSound').play().catch(function(error) {
-        console.log("Audio play failed:", error);
-      });
-      alert("ALONG CLUB WELCOMES YOU!");
-    }
-    function generate() {
-      let min = parseInt(document.getElementById('min').value);
-      let max = parseInt(document.getElementById('max').value);
-      if (isNaN(min) || isNaN(max)) {
-        alert("Sila masukkan nombor yang sah!");
-        return;
+      if (minInput && maxInput && leftRightCheckbox && upDownCheckbox && resultDiv) {
+        resultDiv.innerText = '-';
+        minInput.value = '1';
+        maxInput.value = '30';
+        leftRightCheckbox.checked = true;
+        upDownCheckbox.checked = true;
+        console.log("Form reset");
+      } else {
+        console.error("One or more elements not found during reset");
+        alert("Ralat: Elemen HTML tidak ditemui!");
       }
-      if (min >= max) {
-        alert("Max harus lebih besar dari Min!");
-        return;
-      }
-      let number = Math.floor(Math.random() * (max - min + 1)) + min;
-      let leftRight = document.getElementById('leftRight').checked
-        ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
-        : null;
-      let upDown = document.getElementById('upDown').checked
-        ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
-        : null;
-      let resultParts = [number];
-      if (leftRight) resultParts.push(leftRight);
-      if (upDown) resultParts.push(upDown);
-      let result = resultParts.join(', ');
-      document.getElementById('result').innerText = result;
-    }
-    function resetAll() {
-      document.getElementById('result').innerText = '-';
-      document.getElementById('min').value = '1';
-      document.getElementById('max').value = '30';
-      document.getElementById('leftRight').checked = true;
-      document.getElementById('upDown').checked = true;
     }
   </script>
 </body>
