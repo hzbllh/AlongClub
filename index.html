@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Along Club - Generator</title>
+  <meta name="description" content="Along Club: Random number and direction generator for gaming">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #1c2526;
+      color: #ff6200;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 2em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    h1 img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 1s forwards 0.2s;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      opacity: 0;
+      animation: fadeIn 1s forwards 0.4s;
+    }
+    input[type="number"], button {
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 1em;
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 5px;
+    }
+    input[type="number"] {
+      background: #fff;
+      color: #1c2526;
+    }
+    button {
+      background: #ff6200;
+      color: #1c2526;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ff8533;
+    }
+    #resetBtn {
+      background: #8b0000;
+      color: #fff;
+    }
+    #resetBtn:hover {
+      background: #a50000;
+    }
+    #backBtn {
+      background: #ff6200;
+      color: #1c2526;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 1s forwards 0.6s;
+    }
+    #backBtn:hover {
+      background: #ff8533;
+    }
+    .checkbox-container {
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+    }
+    .checkbox-container label {
+      color: #ff6200;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 2em;
+      margin: 20px 0;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    #history {
+      font-size: 0.9em;
+      text-align: left;
+      width: 100%;
+    }
+    #history ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #history li {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    #footer {
+      margin-top: 20px;
+      font-size: 1em;
+      color: #ff6200;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards 0.8s;
+    }
+    .social-links {
+      margin-top: 10px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .social-links img {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s;
+    }
+    .social-links img:hover {
+      transform: scale(1.2);
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.3em; }
+      h1 img { height: 30px; }
+      .container { padding: 15px; }
+      #result { font-size: 1.5em; }
+      #footer { font-size: 0.8em; }
+      .social-links img { width: 20px; height: 20px; }
+    }
+    @media (max-width: 400px) {
+      h1 { font-size: 1em; }
+      h1 img { height: 25px; }
+      #result { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <img src="https://via.placeholder.com/40" alt="Along Club Logo" onclick="showPopup()">
+    ALONG CLUB
+  </h1>
+  <div class="container">
+    <input type="number" id="min" placeholder="Min Number" value="1">
+    <input type="number" id="max" placeholder="Max Number" value="30">
+    <div class="checkbox-container">
+      <label><input type="checkbox" id="leftRight" checked> Kiri/Kanan</label>
+      <label><input type="checkbox" id="upDown" checked> Atas/Bawah</label>
+    </div>
+    <button onclick="generate()">Generate!</button>
+    <button id="resetBtn" onclick="resetAll()">Reset</button>
+    <div id="result">-</div>
+    <div id="history"><ul><li>History: None</li></ul></div>
+  </div>
+  <a href="index.html"><button id="backBtn">Kembali ke Halaman Utama</button></a>
+  <div id="footer">
+    ALONG CLUB - GOOD LUCK!
+    <div class="social-links">
+      <a href="https://www.tiktok.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+    </div>
+  </div>
+  <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
+
+  <script>
+    let history = [];
+    function showPopup() {
+      document.getElementById('popupSound').play().catch(function(error) {
+        console.log("Audio play failed:", error);
+      });
+      alert("ALONG CLUB WELCOMES YOU!");
+    }
+    function generate() {
+      let min = parseInt(document.getElementById('min').value);
+      let max = parseInt(document.getElementById('max').value);
+      if (isNaN(min) || isNaN(max)) {
+        alert("Sila masukkan nombor yang sah!");
+        return;
+      }
+      if (min >= max) {
+        alert("Max harus lebih besar dari Min!");
+        return;
+      }
+      let number = Math.floor(Math.random() * (max - min + 1)) + min;
+      let leftRight = document.getElementById('leftRight').checked
+        ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
+        : null;
+      let upDown = document.getElementById('upDown').checked
+        ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
+        : null;
+      let resultParts = [number];
+      let historyParts = [`Nombor: ${number}`];
+      if (leftRight) {
+        resultParts.push(leftRight);
+        historyParts.push(`Arah: ${leftRight}`);
+      }
+      if (upDown) {
+        resultParts.push(upDown);
+        historyParts.push(upDown);
+      }
+      let result = resultParts.join(', ');
+      let historyEntry = historyParts.join(', ');
+      document.getElementById('result').innerText = result;
+      updateHistory(historyEntry);
+    }
+    function updateHistory(result) {
+      history.unshift(result);
+      if (history.length > 5) history.pop();
+      let historyList = history.length > 0
+        ? history.map(item => `<li>${item}</li>`).join('')
+        : '<li>History: None</li>';
+      document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
+    }
+    function resetAll() {
+      history = [];
+      document.getElementById('result').innerText = '-';
+      document.getElementById('history').innerHTML = '<ul><li>History: None</li></ul>';
+      document.getElementById('min').value = '1';
+      document.getElementById('max').value = '30';
+      document.getElementById('leftRight').checked = true;
+      document.getElementById('upDown').checked = true;
+    }
+  </script>
+</body>
+</html>
