@@ -100,23 +100,6 @@
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-    #history {
-      font-size: 0.9em;
-      text-align: left;
-      width: 100%;
-    }
-    #history ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    #history li {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 8px;
-      margin: 5px 0;
-      border-radius: 5px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
     #footer {
       margin-top: 20px;
       font-size: 1em;
@@ -160,7 +143,7 @@
 </head>
 <body>
   <h1>
-    <img src="https://github.com/hzbllh/AlongClub/blob/3a3c6b7c8785439bffcbe9f220421a28d454f4f0/IMG_20250513_124840.jpg" alt="Along Club Logo" onclick="showPopup()">
+    <img src="https://raw.githubusercontent.com/hzbllh/AlongClub/refs/heads/main/IMG_20250513_124840.jpg" alt="Along Club Logo" onclick="showPopup()">
     ALONG CLUB
   </h1>
   <div class="container">
@@ -173,7 +156,6 @@
     <button onclick="generate()">Generate!</button>
     <button id="resetBtn" onclick="resetAll()">Reset</button>
     <div id="result">-</div>
-    <div id="history"><ul><li>History: None</li></ul></div>
   </div>
   <div id="footer">
     ALONG CLUB - GOOD LUCK!
@@ -184,7 +166,6 @@
   <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
 
   <script>
-    let history = [];
     function showPopup() {
       document.getElementById('popupSound').play().catch(function(error) {
         console.log("Audio play failed:", error);
@@ -210,32 +191,13 @@
         ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
         : null;
       let resultParts = [number];
-      let historyParts = [`Nombor: ${number}`];
-      if (leftRight) {
-        resultParts.push(leftRight);
-        historyParts.push(`Arah: ${leftRight}`);
-      }
-      if (upDown) {
-        resultParts.push(upDown);
-        historyParts.push(upDown);
-      }
+      if (leftRight) resultParts.push(leftRight);
+      if (upDown) resultParts.push(upDown);
       let result = resultParts.join(', ');
-      let historyEntry = historyParts.join(', ');
       document.getElementById('result').innerText = result;
-      updateHistory(historyEntry);
-    }
-    function updateHistory(result) {
-      history.unshift(result);
-      if (history.length > 5) history.pop();
-      let historyList = history.length > 0
-        ? history.map(item => `<li>${item}</li>`).join('')
-        : '<li>History: None</li>';
-      document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
     }
     function resetAll() {
-      history = [];
       document.getElementById('result').innerText = '-';
-      document.getElementById('history').innerHTML = '<ul><li>History: None</li></ul>';
       document.getElementById('min').value = '1';
       document.getElementById('max').value = '30';
       document.getElementById('leftRight').checked = true;
