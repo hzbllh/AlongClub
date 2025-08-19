@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Along Club - Ranking</title>
+    <meta name="description" content="Along Club: Sort and rank numbers with custom highlights">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --bg: #1c2526;
+            --accent: #ff6200;
+            --hover: #ff8533;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--bg);
+            color: var(--accent);
+            box-sizing: border-box;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 0;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        .hero img {
+            height: 80px;
+            width: auto;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s 0.2s forwards;
+        }
+        .hero img:hover {
+            transform: scale(1.2);
+        }
+        .hero h2 {
+            font-size: 2em;
+            margin: 0 0 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: fadeIn 1s 0.4s forwards;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.4s;
+        }
+        p, label {
+            font-size: 1em;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        textarea, input[type="text"], select {
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 5px;
+            background: #fff;
+            color: var(--bg);
+        }
+        button {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: var(--hover);
+        }
+        #resetBtn {
+            background: #8b0000;
+            color: #fff;
+        }
+        #resetBtn:hover {
+            background: #a50000;
+        }
+        #backBtn {
+            background: #4a4a4a;
+            color: #fff;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.6s;
+        }
+        #backBtn:hover {
+            background: #6a6a6a;
+        }
+        #result {
+            margin: 20px 0;
+            text-align: left;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        #result h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        #result ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #result li {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        #result p {
+            margin: 10px 0;
+            color: var(--hover);
+        }
+        #footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            font-size: 1em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.8s;
+        }
+        .social-links {
+            margin-top: 10px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .social-links img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
+        .social-links img:hover {
+            transform: scale(1.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 600px) {
+            .hero img { height: 60px; }
+            .hero h2 { font-size: 1.3em; }
+            .container { padding: 15px; }
+            textarea, input[type="text"], select, button { font-size: 0.9em; }
+            #result h3 { font-size: 1em; }
+            #footer { font-size: 0.8em; }
+            .social-links img { width: 20px; height: 20px; }
+        }
+        @media (max-width: 400px) {
+            .hero img { height: 50px; }
+            .hero h2 { font-size: 1em; }
+            #result h3 { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <section class="hero">
+        <img src="https://raw.githubusercontent.com/hzbllh/AlongClub/refs/heads/main/IMG_20250513_124840.jpg" alt="Along Club Logo" onclick="showPopup()">
+        <h2>Along Club</h2>
+        <div class="container">
+            <p>Masukkan nombor (satu setiap baris):</p>
+            <textarea id="inputNumbers" rows="5" cols="30" placeholder="Contoh:
+615
+831
+164
+944"></textarea>
+            <br>
+            <label for="sortOrder">Pilih urutan:</label>
+            <select id="sortOrder">
+                <option value="ascending">Menaik (Kecil ke Besar)</option>
+                <option value="descending">Menurun (Besar ke Kecil)</option>
+            </select>
+            <br>
+            <label for="highlightPositions">Pilih kedudukan untuk ditanda (pisahkan dengan koma, contoh: 1, 3):</label>
+            <input type="text" id="highlightPositions" placeholder="Contoh: 1, 3">
+            <br>
+            <button onclick="sortNumbers()">Susun Nombor</button>
+            <button id="resetBtn" onclick="resetForm()">Reset</button>
+            <a href="index.html"><button id="backBtn">Kembali ke Halaman Utama</button></a>
+            <div id="result"></div>
+        </div>
+    </section>
+    <div id="footer">
+        ALONG CLUB - GOOD LUCK!
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@alongg27?_t=ZS-8wJQ2vfC0AM&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+        </div>
+    </div>
+    <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
+
+    <script>
+        particlesJS({
+            particles: {
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: "#ff6200" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                move: { enable: true, speed: 2, direction: "none", random: true }
+            },
+            interactivity: {
+                events: { onhover: { enable: true, mode: "repulse" } },
+                modes: { repulse: { distance: 100, duration: 0.4 } }
+            }
+        });
+
+        function showPopup() {
+            console.log("Popup triggered");
+            document.getElementById('popupSound').play().catch(function(error) {
+                console.log("Audio play failed:", error);
+            });
+            alert("MASIH BELUM, MALAM HIJAU");
+        }
+
+        function sortNumbers() {
+            const input = document.getElementById('inputNumbers').value;
+            const sortOrder = document.getElementById('sortOrder').value;
+            const highlightInput = document.getElementById('highlightPositions').value;
+            const numbers = input.split('\n')
+                                .map(num => parseFloat(num.trim()))
+                                .filter(num => !isNaN(num));
+
+            if (numbers.length === 0) {
+                document.getElementById('result').innerHTML = `<p style="color: var(--hover);">Sila masukkan sekurang-kurangnya satu nombor yang sah.</p>`;
+                return;
+            }
+
+            const sortedNumbers = [...numbers].sort((a, b) => 
+                sortOrder === 'ascending' ? a - b : b - a
+            );
+
+            const highlightPositions = highlightInput
+                .split(',')
+                .map(pos => parseInt(pos.trim()))
+                .filter(pos => !isNaN(pos));
+
+            let errorMessage = '';
+            const invalidPositions = highlightPositions.filter(pos => pos < 1 || pos > sortedNumbers.length);
+            if (invalidPositions.length > 0) {
+                errorMessage = `<p style="color: var(--hover);">Kedudukan tidak sah: ${invalidPositions.join(', ')}. Sila pilih antara 1 hingga ${sortedNumbers.length}.</p>`;
+            }
+
+            const numberList = sortedNumbers.map((num, index) => {
+                const position = index + 1;
+                const isHighlighted = highlightPositions.includes(position);
+                return `<li style="${isHighlighted ? 'font-weight: bold; color: var(--hover);' : ''}">${num}${isHighlighted ? ' (Kedudukan ' + position + ')' : ''}</li>`;
+            }).join('');
+
+            const title = sortOrder === 'ascending' 
+                ? 'Utur Menaik (Kecil ke Besar)' 
+                : 'Utur Menurun (Besar ke Kecil)';
+
+            document.getElementById('result').innerHTML = `
+                ${errorMessage}
+                <h3>${title}:</h3>
+                <ul>${numberList}</ul>
+            `;
+        }
+
+        function resetForm() {
+            document.getElementById('inputNumbers').value = '';
+            document.getElementById('sortOrder').value = 'ascending';
+            document.getElementById('highlightPositions').value = '';
+            document.getElementById('result').innerHTML = '';
+        }
+    </script>
+</body>
+          </html>
