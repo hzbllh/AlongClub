@@ -127,6 +127,84 @@
     <h1>Along Club</h1>
     <a href="generator.html"><button>Generator</button></a>
     <a href="ranking.html"><button>Ranking</button></a>
+  </section>
+  <div id="footer">
+    ALONG CLUB - GOOD LUCK!
+    <div class="social-links">
+      <a href="https://www.tiktok.com/@alongg27?_t=ZS-8wJQ2vfC0AM&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+    </div>
+  </div>
+  <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
+
+  <script>
+    particlesJS({
+      particles: {
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: "#ff6200" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 2, direction: "none", random: true }
+      },
+      interactivity: {
+        events: { onhover: { enable: true, mode: "repulse" } },
+        modes: { repulse: { distance: 100, duration: 0.4 } }
+      }
+    });
+
+    function showPopup() {
+      console.log("Popup triggered");
+      document.getElementById('popupSound').play().catch(function(error) {
+        console.log("Audio play failed:", error);
+      });
+      alert("MASIH BELUM, MALAM HIJAU");
+    }
+  </script>
+</body>
+</html>      font-size: 1em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      animation: fadeIn 1s 0.8s forwards;
+    }
+    .social-links {
+      margin-top: 10px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .social-links img {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s;
+    }
+    .social-links img:hover {
+      transform: scale(1.2);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      .hero img { height: 60px; }
+      .hero h1 { font-size: 1.3em; }
+      .hero button { width: 150px; font-size: 0.9em; padding: 10px; }
+      #footer { font-size: 0.8em; }
+      .social-links img { width: 20px; height: 20px; }
+    }
+    @media (max-width: 400px) {
+      .hero img { height: 50px; }
+      .hero h1 { font-size: 1em; }
+      .hero button { width: 120px; font-size: 0.8em; }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <section class="hero">
+    <img src="https://raw.githubusercontent.com/hzbllh/AlongClub/refs/heads/main/IMG_20250513_124840.jpg" alt="Along Club Logo" onclick="showPopup()">
+    <h1>Along Club</h1>
+    <a href="generator.html"><button>Generator</button></a>
+    <a href="ranking.html"><button>Ranking</button></a>
     <a href="tetris.html"><button>Tetris</button></a>
     <a href="snake.html"><button>Snake</button></a>
   </section>
