@@ -3,112 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Along Club - Generator</title>
-  <meta name="description" content="Along Club: Random number and direction generator for gaming">
+  <title>Along Club - Home</title>
+  <meta name="description" content="Along Club: Your ultimate gaming tool for random number and direction generation">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
+    :root {
+      --bg: #1c2526;
+      --accent: #ff6200;
+      --hover: #ff8533;
+    }
     body {
-      background: #1c2526;
-      color: #ff6200;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
       margin: 0;
       padding: 20px;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-size: 2em;
-      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      background: var(--bg);
+      color: var(--accent);
+      box-sizing: border-box;
+    }
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      z-index: 0;
+    }
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+      z-index: 1;
       opacity: 0;
       animation: fadeIn 1s forwards;
     }
-    h1 img {
+    .hero img {
       height: 80px;
       width: auto;
       cursor: pointer;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
       opacity: 0;
-      animation: fadeIn 1s forwards 0.2s;
+      animation: fadeIn 1s 0.2s forwards;
     }
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
+    .hero img:hover {
+      transform: scale(1.2);
+    }
+    .hero h1 {
+      font-size: 2em;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       opacity: 0;
-      animation: fadeIn 1s forwards 0.4s;
+      animation: fadeIn 1s 0.4s forwards;
     }
-    input[type="number"], button {
+    .hero button {
+      background: var(--accent);
+      color: var(--bg);
       padding: 12px;
       margin: 10px 0;
-      font-size: 1em;
-      width: 100%;
-      box-sizing: border-box;
       border: none;
       border-radius: 5px;
-    }
-    input[type="number"] {
-      background: #fff;
-      color: #1c2526;
-    }
-    button {
-      background: #ff6200;
-      color: #1c2526;
-      cursor: pointer;
+      font-size: 1em;
       font-weight: bold;
-    }
-    button:hover {
-      background: #ff8533;
-    }
-    #resetBtn {
-      background: #8b0000;
-      color: #fff;
-    }
-    #resetBtn:hover {
-      background: #a50000;
-    }
-    .checkbox-container {
-      display: flex;
-      flex-direction: column;
-      margin: 10px 0;
-    }
-    .checkbox-container label {
-      color: #ff6200;
-      font-size: 0.9em;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
       cursor: pointer;
-    }
-    #result {
-      font-size: 2em;
-      margin: 20px 0;
+      width: 200px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
       opacity: 0;
-      animation: fadeIn 0.5s forwards;
-      text-align: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s 0.6s forwards;
+    }
+    .hero button:hover {
+      background: var(--hover);
     }
     #footer {
-      margin-top: 20px;
-      font-size: 1em;
-      color: #ff6200;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      margin-top: auto;
+      padding: 20px;
       text-align: center;
+      font-size: 1em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
       opacity: 0;
-      animation: fadeIn 1s forwards 0.8s;
+      animation: fadeIn 1s 0.8s forwards;
     }
     .social-links {
       margin-top: 10px;
@@ -125,39 +103,33 @@
       transform: scale(1.2);
     }
     @keyframes fadeIn {
+      from { opacity: 0; }
       to { opacity: 1; }
     }
     @media (max-width: 600px) {
-      h1 { font-size: 1.3em; }
-      h1 img { height: 60px; }
-      .container { padding: 15px; }
-      #result { font-size: 1.5em; }
+      .hero img { height: 60px; }
+      .hero h1 { font-size: 1.3em; }
+      .hero button { width: 150px; font-size: 0.9em; padding: 10px; }
       #footer { font-size: 0.8em; }
       .social-links img { width: 20px; height: 20px; }
     }
     @media (max-width: 400px) {
-      h1 { font-size: 1em; }
-      h1 img { height: 50px; }
-      #result { font-size: 1.2em; }
+      .hero img { height: 50px; }
+      .hero h1 { font-size: 1em; }
+      .hero button { width: 120px; font-size: 0.8em; }
     }
   </style>
 </head>
 <body>
-  <h1>
+  <div id="particles-js"></div>
+  <section class="hero">
     <img src="https://raw.githubusercontent.com/hzbllh/AlongClub/refs/heads/main/IMG_20250513_124840.jpg" alt="Along Club Logo" onclick="showPopup()">
-    ALONG CLUB
-  </h1>
-  <div class="container">
-    <input type="number" id="min" placeholder="Min Number" value="1">
-    <input type="number" id="max" placeholder="Max Number" value="30">
-    <div class="checkbox-container">
-      <label><input type="checkbox" id="leftRight" checked> Kiri/Kanan</label>
-      <label><input type="checkbox" id="upDown" checked> Atas/Bawah</label>
-    </div>
-    <button id="generateBtn" onclick="generate()">Generate!</button>
-    <button id="resetBtn" onclick="resetAll()">Reset</button>
-    <div id="result">-</div>
-  </div>
+    <h1>Along Club</h1>
+    <a href="generator.html"><button>Generator</button></a>
+    <a href="ranking.html"><button>Ranking</button></a>
+    <a href="tetris.html"><button>Tetris</button></a>
+    <a href="snake.html"><button>Snake</button></a>
+  </section>
   <div id="footer">
     ALONG CLUB - GOOD LUCK!
     <div class="social-links">
@@ -167,79 +139,27 @@
   <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
 
   <script>
+    particlesJS({
+      particles: {
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: "#ff6200" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 2, direction: "none", random: true }
+      },
+      interactivity: {
+        events: { onhover: { enable: true, mode: "repulse" } },
+        modes: { repulse: { distance: 100, duration: 0.4 } }
+      }
+    });
+
     function showPopup() {
       console.log("Popup triggered");
       document.getElementById('popupSound').play().catch(function(error) {
         console.log("Audio play failed:", error);
       });
-      alert("MASIH BELUM , MALAM HIJAU");
-    }
-
-    function generate() {
-      console.log("Generate button clicked");
-      const minInput = document.getElementById('min');
-      const maxInput = document.getElementById('max');
-      const leftRightCheckbox = document.getElementById('leftRight');
-      const upDownCheckbox = document.getElementById('upDown');
-      const resultDiv = document.getElementById('result');
-
-      if (!minInput || !maxInput || !leftRightCheckbox || !upDownCheckbox || !resultDiv) {
-        console.error("One or more elements not found");
-        alert("Ralat: Elemen HTML tidak ditemui!");
-        return;
-      }
-
-      let min = parseInt(minInput.value);
-      let max = parseInt(maxInput.value);
-
-      if (isNaN(min) || isNaN(max)) {
-        console.error("Invalid number input:", minInput.value, maxInput.value);
-        alert("Sila masukkan nombor yang sah!");
-        return;
-      }
-
-      if (min >= max) {
-        console.error("Min is greater than or equal to Max:", min, max);
-        alert("Max harus lebih besar dari Min!");
-        return;
-      }
-
-      let number = Math.floor(Math.random() * (max - min + 1)) + min;
-      let leftRight = leftRightCheckbox.checked
-        ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
-        : null;
-      let upDown = upDownCheckbox.checked
-        ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
-        : null;
-
-      let resultParts = [number];
-      if (leftRight) resultParts.push(leftRight);
-      if (upDown) resultParts.push(upDown);
-
-      let result = resultParts.join(', ');
-      resultDiv.innerText = result;
-      console.log("Generated result:", result);
-    }
-
-    function resetAll() {
-      console.log("Reset button clicked");
-      const minInput = document.getElementById('min');
-      const maxInput = document.getElementById('max');
-      const leftRightCheckbox = document.getElementById('leftRight');
-      const upDownCheckbox = document.getElementById('upDown');
-      const resultDiv = document.getElementById('result');
-
-      if (minInput && maxInput && leftRightCheckbox && upDownCheckbox && resultDiv) {
-        resultDiv.innerText = '-';
-        minInput.value = '1';
-        maxInput.value = '30';
-        leftRightCheckbox.checked = true;
-        upDownCheckbox.checked = true;
-        console.log("Form reset");
-      } else {
-        console.error("One or more elements not found during reset");
-        alert("Ralat: Elemen HTML tidak ditemui!");
-      }
+      alert("MASIH BELUM, MALAM HIJAU");
     }
   </script>
 </body>
