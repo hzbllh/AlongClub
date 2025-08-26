@@ -125,7 +125,7 @@
       cursor: pointer;
     }
     #result {
-      font-size: 2.5em; /* Saiz fon diperbesar */
+      font-size: 3cm; /* Saiz fon diperbesar kepada 3cm */
       margin: 20px 0;
       opacity: 0;
       animation: fadeIn 0.5s forwards;
@@ -163,7 +163,7 @@
       .hero img { height: 60px; }
       .hero h1 { font-size: 1.3em; }
       .container { padding: 15px; }
-      #result { font-size: 2em; } /* Saiz fon untuk skrin kecil */
+      #result { font-size: 2cm; } /* Saiz fon untuk skrin kecil */
       #footer { font-size: 0.8em; }
       .social-links img { width: 20px; height: 20px; }
       button { font-size: 0.9em; padding: 10px; }
@@ -171,7 +171,7 @@
     @media (max-width: 400px) {
       .hero img { height: 50px; }
       .hero h1 { font-size: 1em; }
-      #result { font-size: 1.8em; } /* Saiz fon untuk skrin sangat kecil */
+      #result { font-size: 1.5cm; } /* Saiz fon untuk skrin sangat kecil */
       button { font-size: 0.8em; }
     }
   </style>
@@ -183,10 +183,10 @@
     <h1>Along Club</h1>
     <div class="container">
       <input type="number" id="min" placeholder="Min Number" value="1">
-      <input type="number" id="max" placeholder="Max Number" value="30">
+      <input type="number" id="max" placeholder="Max Number" value="50">
       <div class="checkbox-container">
-        <label><input type="checkbox" id="leftRight" checked> Kiri/Kanan</label>
-        <label><input type="checkbox" id="upDown" checked> Atas/Bawah</label>
+        <label><input type="checkbox" id="leftRight"> Kiri/Kanan</label>
+        <label><input type="checkbox" id="upDown"> Atas/Bawah</label>
       </div>
       <button id="generateBtn" onclick="generate()">Generate!</button>
       <button id="resetBtn" onclick="resetAll()">Reset</button>
@@ -283,9 +283,9 @@
       if (minInput && maxInput && leftRightCheckbox && upDownCheckbox && resultDiv) {
         resultDiv.innerText = '-';
         minInput.value = '1';
-        maxInput.value = '30';
-        leftRightCheckbox.checked = true;
-        upDownCheckbox.checked = true;
+        maxInput.value = '50';
+        leftRightCheckbox.checked = false;
+        upDownCheckbox.checked = false;
         console.log("Form reset");
       } else {
         console.error("One or more elements not found during reset");
